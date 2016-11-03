@@ -17,5 +17,5 @@ public @interface Inject {
      * 待注入的bean名称,否则为类名首字母小写
      * @return
      */
-    String name() default "";
+    /*String name() default "";*/
 }

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * Created by Song on 2016/11/2.
  * @since v0.0
  */
-public class PropsUtil {
+public final class PropsUtil {
     private static final Pattern PATTERN = Pattern.compile("\\$\\{([^\\}]+)\\}");
 
     /**
