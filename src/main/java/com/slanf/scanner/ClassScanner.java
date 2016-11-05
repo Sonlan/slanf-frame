@@ -1,5 +1,9 @@
 package com.slanf.scanner;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.net.JarURLConnection;
@@ -16,11 +20,13 @@ import java.util.jar.JarFile;
  * 类搜索器，加载基础包名下的类
  */
 public final class ClassScanner {
+    private static Logger logger = LoggerFactory.getLogger(ClassScanner.class);
     /**
      * 获取类加载器
      * @return
      */
     public static ClassLoader getClassLoader(){
+        //return ClassLoader.getSystemClassLoader();
         return Thread.currentThread().getContextClassLoader();
     }
 
@@ -34,6 +40,7 @@ public final class ClassScanner {
         Class<?> cls;
         try {
             cls = Class.forName(className,isInitialized,getClassLoader());
+            //cls = Class.forName(className);
         }catch (ClassNotFoundException e){
             System.err.println("load class "+className+" falied");
             throw  new RuntimeException(e);
@@ -47,6 +54,7 @@ public final class ClassScanner {
      * @return
      */
     public static Set<Class<?>> getClassSet(String packageName){
+        logger.info("ClassScanner start to scan all the classes of package "+packageName);
         Set<Class<?>> classSet = new HashSet<Class<?>>();
         try {
             Enumeration<URL> urls = getClassLoader().getResources(packageName.replace(".","/"));
@@ -113,7 +121,7 @@ public final class ClassScanner {
                 }
                 String subPackageName = fileName;
                 if(null != packageName && !"".equals(packageName)){
-                    subPackageName = subPackageName+"."+subPackageName;
+                    subPackageName = packageName+"."+subPackageName;
                 }
                 addClass(classSet,subPackagePath,subPackageName); //递归查找子目录
             }

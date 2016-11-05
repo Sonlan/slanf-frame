@@ -2,6 +2,8 @@ package com.slanf.helper.loader;
 
 import com.slanf.helper.*;
 import com.slanf.scanner.ClassScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Song on 2016/11/3.
@@ -9,9 +11,9 @@ import com.slanf.scanner.ClassScanner;
  * 用于加载Helper类
  */
 public final class HelperLoader {
+    public static Logger logger = LoggerFactory.getLogger(HelperLoader.class);
     public static void init(){
         Class<?> [] clss = {
-                ConfigHelper.class,
                 BeanHelper.class,
                 ClassHelper.class,
                 ControllerHelper.class,
@@ -19,7 +21,8 @@ public final class HelperLoader {
         };
 
         for(Class<?> cls:clss){
-            ClassScanner.loadClass(cls.getName(),false);
+            logger.info("start to initiate class "+cls);
+            ClassScanner.loadClass(cls.getName(),true);
         }
     }
 }

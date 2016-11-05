@@ -5,6 +5,8 @@ import com.slanf.annotation.Controller;
 import com.slanf.annotation.RequestURI;
 import com.slanf.helper.beans.Handler;
 import com.slanf.helper.beans.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -18,6 +20,7 @@ import java.util.Set;
  * :@Controller标签处理类
  */
 public class ControllerHelper {
+    private static Logger logger = LoggerFactory.getLogger(ControllerHelper.class);
     /**
      * 存放请求与处理逻辑的映射关系
      */
@@ -33,7 +36,7 @@ public class ControllerHelper {
                     String uri = annotation.URI();
                     RequestMethod requestType = annotation.METHOD();
                     ACTION_MAP.put(new Request(requestType,uri),new Handler(cls,method));
-                    System.out.println("Controller Mapping: "+uri+" ----->"+cls.getName()+"."+method.getName());
+                    logger.info("Controller Mapping: "+uri+" ----->"+cls.getName()+"."+method.getName());
                 }
             }
         }

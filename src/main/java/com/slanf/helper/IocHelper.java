@@ -30,6 +30,7 @@ public final class IocHelper {
         Field [] fields= cls.getDeclaredFields();
         for(Field field:fields){
             if(field.isAnnotationPresent(Inject.class)){
+                field.setAccessible(true);
                 ReflectUtil.setField(beanMap.get(cls),field,beanMap.get(field.getType()));
             }
         }

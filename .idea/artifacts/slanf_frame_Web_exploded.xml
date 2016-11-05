@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="slanf-frame:Web exploded">
+  <artifact type="exploded-war" build-on-make="true" name="slanf-frame:Web exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/slanf_frame_Web_exploded</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="slanf-frame/web/Web" />
